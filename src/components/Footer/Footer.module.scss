@@ -1,0 +1,162 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.footer {
+    min-height: 333px;
+    background-color: $color-footer;
+    padding: 40px 0;
+
+    @include tablet {
+        padding: 20px;
+    }
+
+    @include mobile {
+        padding: 40px 20px 0;
+    }
+}
+
+.container {
+    @include container;
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+
+    @include mobile {
+        flex-wrap: wrap;
+        gap: 40px;
+    }
+}
+
+.branding {
+    width: 32%;
+    min-height: 220px;
+    margin-right: 200px;
+
+    @include tablet {
+        width: 82%;
+        margin-right: 40px;
+    }
+
+    @include mobile {
+        width: 100%;
+        min-height: 130px;
+        margin-right: 0;
+    }
+}
+
+.logo {
+    width: 56%;
+    margin-bottom: 20px;
+
+    @include tablet {
+        width: 71%;
+    }
+
+    @include mobile {
+        width: 40%;
+    }
+}
+
+.description {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 26px;
+    color: $color-white;
+
+    @include tablet {
+        font-size: 10px;
+        line-height: 16px;
+    }
+
+    @include mobile {
+        font-size: 12px;
+        line-height: 16px;
+    }
+}
+
+.links {
+    width: 19%;
+    min-height: 220px;
+
+    @include tablet {
+        width: 52%;
+    }
+
+    @include mobile {
+        width: 40%;
+        min-height: 140px;
+    }
+}
+
+.social {
+    width: 16%;
+    min-height: 220px;
+
+    @include tablet {
+        width: 43%;
+    }
+
+    @include mobile {
+        width: 45%;
+        min-height: 170px;
+    }
+}
+
+.contact {
+    width: 40%;
+    min-height: 220px;
+
+    @include tablet {
+        width: 100%;
+    }
+
+    @include mobile {
+        width: 100%;
+    }
+}
+
+.title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 31px;
+    color: $color-white;
+    margin-bottom: 15px;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    li a {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 16px;
+        color: $color-white;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: $color-orange;
+        }
+    }
+}
+
+.contactList {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+
+    li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 18px;
+        color: $color-white;
+    }
+}
+
+.icon {
+    font-size: 16px;
+}

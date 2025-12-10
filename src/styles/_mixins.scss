@@ -1,0 +1,81 @@
+@use 'variables' as *;
+
+@mixin container {
+    max-width: $container-max;
+    margin: 0 auto;
+    width: 100%;
+}
+
+@mixin tablet {
+    @media (max-width: $breakpoint-tablet) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media (max-width: $breakpoint-mobile) {
+        @content;
+    }
+}
+
+@mixin small {
+    @media (max-width: $breakpoint-small) {
+        @content;
+    }
+}
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin section-title {
+    font-size: 56px;
+    font-weight: 600;
+    line-height: 66px;
+    color: $color-text-black;
+
+    @include tablet {
+        font-size: 26px;
+        line-height: 36px;
+    }
+
+    @include mobile {
+        font-size: 26px;
+        line-height: 36px;
+    }
+}
+
+@mixin section-subtitle {
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: $color-text-gray;
+
+    @include mobile {
+        font-size: 12px;
+    }
+}
+
+@mixin body-text {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+
+    @include mobile {
+        font-size: 14px;
+        line-height: 24px;
+    }
+}
+
+@mixin card-title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 31px;
+    color: $color-text-dark;
+
+    @include mobile {
+        font-size: 16px;
+    }
+}

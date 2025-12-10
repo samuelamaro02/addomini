@@ -1,0 +1,202 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.hero {
+    min-height: 820px;
+    background-image: url('/images/Hero.webp');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+
+    @include tablet {
+        padding: 0 20px;
+    }
+
+    @include mobile {
+        min-height: auto;
+        padding: 25px 20px 80px;
+    }
+}
+
+.container {
+    @include container;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    @include mobile {
+        flex-direction: column;
+    }
+}
+
+.content {
+    width: 60%;
+    padding-right: 70px;
+
+    @include tablet {
+        width: 50%;
+        padding-right: 0;
+    }
+
+    @include mobile {
+        width: 100%;
+        padding-right: 0;
+        padding-bottom: 25px;
+    }
+}
+
+.title {
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 70px;
+    color: $color-white;
+    margin-bottom: 10px;
+
+    @include tablet {
+        font-size: 26px;
+        line-height: 36px;
+    }
+
+    @include mobile {
+        font-size: 26px;
+        line-height: 36px;
+    }
+}
+
+.description {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    color: $color-white;
+    margin-bottom: 40px;
+
+    @include mobile {
+        font-size: 14px;
+        line-height: 24px;
+        margin-bottom: 10px;
+    }
+}
+
+.cta {
+    margin-bottom: 50px;
+
+    @include tablet {
+        margin-bottom: 20px;
+    }
+
+    @include mobile {
+        margin-bottom: 20px;
+    }
+}
+
+.stats {
+    display: flex;
+    gap: 5px;
+
+    @include tablet {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    @include mobile {
+        flex-direction: row;
+        gap: 20px;
+        padding-top: 20px;
+    }
+}
+
+.statItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 41%;
+
+    @include mobile {
+        width: auto;
+    }
+}
+
+.statIcon {
+    width: 40px;
+    height: 40px;
+
+    @include mobile {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.statText {
+    display: flex;
+    flex-direction: column;
+}
+
+.statNumber {
+    font-size: 38px;
+    font-weight: 600;
+    color: $color-white;
+
+    @include mobile {
+        font-size: 22px;
+    }
+}
+
+.statLabel {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    color: $color-white;
+}
+
+.images {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+
+    @include tablet {
+        width: 50%;
+    }
+
+    @include mobile {
+        width: 100%;
+    }
+}
+
+.imageTop {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.imageRow {
+    display: flex;
+    gap: 10px;
+}
+
+.imagePlaceholder {
+    min-height: 300px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    @include mobile {
+        min-height: 150px;
+    }
+
+    .imageTop & {
+        @include mobile {
+            min-height: 173px;
+        }
+    }
+
+    .imageRow & {
+        flex: 1;
+
+        @include mobile {
+            width: 46%;
+            min-height: 150px;
+        }
+    }
+}

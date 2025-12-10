@@ -1,0 +1,83 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: $font-family;
+    color: $color-text-dark;
+    background-color: $color-white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.container {
+    @include container;
+    padding: 0 20px;
+}
+
+.highlight {
+    color: $color-primary;
+}
+
+.btn {
+    display: inline-block;
+    padding: 20px 20px;
+    font-family: $font-family;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    &--primary {
+        background-color: $color-white;
+        color: $color-text-black;
+    }
+
+    &--secondary {
+        background-color: $color-primary;
+        color: $color-white;
+    }
+
+    @include mobile {
+        font-size: 12px;
+        padding: 15px 15px;
+    }
+}

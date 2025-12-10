@@ -1,0 +1,110 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.values {
+    min-height: 670px;
+    background-color: $color-white;
+    display: flex;
+    align-items: center;
+
+    @include tablet {
+        padding: 50px 20px;
+    }
+
+    @include mobile {
+        min-height: auto;
+        padding: 60px 20px;
+    }
+}
+
+.container {
+    @include container;
+}
+
+.header {
+    text-align: center;
+    padding-bottom: 65px;
+
+    @include tablet {
+        padding-bottom: 30px;
+    }
+
+    @include mobile {
+        text-align: left;
+        padding-bottom: 30px;
+    }
+}
+
+.subtitle {
+    @include section-subtitle;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.title {
+    @include section-title;
+    max-width: 34%;
+    margin: 0 auto;
+
+    @include tablet {
+        max-width: 100%;
+    }
+
+    @include mobile {
+        max-width: 100%;
+        margin: 0;
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+
+    @include tablet {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include mobile {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    background-color: $color-card-bg;
+    padding: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.number {
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 31px;
+    color: $color-accent;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.cardTitle {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 31px;
+    color: $color-text-dark;
+    margin-bottom: 20px;
+
+    @include mobile {
+        font-size: 16px;
+        line-height: 26px;
+        margin-bottom: 10px;
+    }
+}
+
+.cardDescription {
+    @include body-text;
+    color: $color-text-dark;
+}
