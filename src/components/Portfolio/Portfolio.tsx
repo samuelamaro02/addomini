@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import styles from './Portfolio.module.scss';
 
 const clients = [
@@ -25,34 +24,6 @@ const clients = [
 ];
 
 export default function Portfolio() {
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const [slidesToShow, setSlidesToShow] = useState(3);
-
-    useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth < 768) {
-                setSlidesToShow(2);
-            } else {
-                setSlidesToShow(3);
-            }
-        };
-
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentSlide(prev => {
-                const maxSlide = Math.max(0, clients.length - slidesToShow);
-                return prev >= maxSlide ? 0 : prev + 1;
-            });
-        }, 3000);
-
-        return () => clearInterval(interval);
-    }, [slidesToShow]);
-
     return (
         <section id="port" className={styles.portfolio}>
             <div className={styles.container}>
@@ -63,11 +34,9 @@ export default function Portfolio() {
 
                 <div className={styles.carouselWrapper}>
                     <div className={styles.carousel}>
-                        <div
-                            className={styles.carouselTrack}
-                            style={{ transform: `translateX(-${currentSlide * (100 / slidesToShow)}%)` }}
-                        >
-                            {clients.map((client, index) => (
+                        <div className={styles.carouselTrack}>
+                            {/* Duplicate items for seamless continuous scrolling */}
+                            {[...clients, ...clients].map((client, index) => (
                                 <div key={index} className={styles.slide}>
                                     <img src={client.image} alt={client.alt} />
                                 </div>
