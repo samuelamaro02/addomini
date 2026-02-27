@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import styles from './Testimonials.module.scss';
 
@@ -33,14 +33,67 @@ function StarRating({ rating }: { rating: number }) {
 
 export default function Testimonials() {
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [touchStart, setTouchStart] = useState<number | null>(null);
+    const [touchEnd, setTouchEnd] = useState<number | null>(null);
+    const [isDragging, setIsDragging] = useState(false);
 
-    const nextSlide = () => {
+    const nextSlide = useCallback(() => {
         setCurrentSlide(prev => (prev + 1) % testimonials.length);
-    };
+    }, []);
 
     const prevSlide = () => {
         setCurrentSlide(prev => (prev - 1 + testimonials.length) % testimonials.length);
     };
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            nextSlide();
+        }, 5000);
+        return () => clearInterval(timer);
+    }, [nextSlide]);
+
+    const minSwipeDistance = 50;
+
+    const onTouchStart = (e: React.TouchEvent | React.MouseEvent) => {
+        setTouchEnd(null);
+        if ('targetTouches' in e) {
+            setTouchStart(e.targetTouches[0].clientX);
+        } else {
+            setIsDragging(true);
+            setTouchStart((e as React.MouseEvent).clientX);
+        }
+    };
+
+    const onTouchMove = (e: React.TouchEvent | React.MouseEvent) => {
+        if ('targetTouches' in e) {
+            setTouchEnd(e.targetTouches[0].clientX);
+        } else if (isDragging) {
+            setTouchEnd((e as React.MouseEvent).clientX);
+        }
+    };
+
+    const onTouchEnd = () => {
+        if (!touchStart || !touchEnd) return;
+        const distance = touchStart - touchEnd;
+        const isLeftSwipe = distance > minSwipeDistance;
+        const isRightSwipe = distance < -minSwipeDistance;
+
+        if (isLeftSwipe) {
+            nextSlide();
+        } else if (isRightSwipe) {
+            prevSlide();
+        }
+
+        setIsDragging(false);
+        setTouchStart(null);
+        setTouchEnd(null);
+    };
+
+    // Calculate dynamic transform based on swipe
+    let swipeOffset = 0;
+    if (touchStart !== null && touchEnd !== null) {
+        swipeOffset = touchStart - touchEnd;
+    }
 
     return (
         <section id="depoimento" className={styles.testimonials}>
@@ -57,10 +110,22 @@ export default function Testimonials() {
                         ←
                     </button>
 
-                    <div className={styles.carousel}>
+                    <div
+                        className={styles.carousel}
+                        onTouchStart={onTouchStart}
+                        onTouchMove={onTouchMove}
+                        onTouchEnd={onTouchEnd}
+                        onMouseDown={onTouchStart}
+                        onMouseMove={onTouchMove}
+                        onMouseUp={onTouchEnd}
+                        onMouseLeave={onTouchEnd}
+                    >
                         <div
                             className={styles.carouselTrack}
-                            style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                            style={{
+                                transform: `translateX(calc(-${currentSlide * 100}% - ${swipeOffset}px))`,
+                                transition: isDragging || (touchStart && touchEnd) ? 'none' : 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)'
+                            }}
                         >
                             {testimonials.map((testimonial, index) => (
                                 <div
