@@ -59,35 +59,117 @@
 .grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: 30px;
+    position: relative;
+    padding-top: 20px;
+
+    // The connecting line (Desktop)
+    &::before {
+        content: '';
+        position: absolute;
+        top: 65px; // Approximate height to align with the numbers
+        left: 10%;
+        width: 80%; // Keep it from touching the far edges
+        height: 2px;
+        background: linear-gradient(90deg, rgba($color-accent, 0.2), $color-accent, rgba($color-accent, 0.2));
+        z-index: 1;
+
+        @include tablet {
+            display: none; // Disable horizontal line on tablet/mobile wraps
+        }
+    }
 
     @include tablet {
         grid-template-columns: repeat(2, 1fr);
+        gap: 40px 20px;
     }
 
     @include mobile {
         grid-template-columns: 1fr;
+        padding-left: 20px;
+
+        // Vertical line for mobile
+        &::after {
+            content: '';
+            position: absolute;
+            top: 50px; // Start around the middle of the first circle
+            bottom: 60px; // End around the last circle
+            left: 20px; // align with the left edge of cards
+            width: 2px;
+            background: linear-gradient(to bottom, rgba($color-accent, 0.2), $color-accent, rgba($color-accent, 0.2));
+            z-index: 1;
+        }
     }
 }
 
 .card {
-    background-color: $color-card-bg;
-    padding: 25px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: $color-white; // Change from $color-card-bg to solid white or whatever fits the design
+    padding: 30px 25px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
+    position: relative;
+    z-index: 2; // Sit above the connecting line
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.05); // Subtle border
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    text-align: center; // Center content for a better node-like appearance
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include mobile {
+        flex-direction: row;
+        align-items: flex-start;
+        text-align: left;
+        margin-left: 10px; // space for the vertical line
+    }
 
     &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+        border-color: rgba($color-accent, 0.3);
     }
 }
 
 .number {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 900;
-    line-height: 31px;
-    color: $color-accent;
-    display: block;
-    margin-bottom: 10px;
+    line-height: 1;
+    color: $color-white;
+    background: $color-accent;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-bottom: 25px;
+    box-shadow: 0 0 0 8px $color-white, 0 5px 15px rgba($color-accent, 0.4);
+    position: relative; // Ensure it stays on top of the card background
+    z-index: 3;
+    transition: transform 0.3s ease;
+
+    @include mobile {
+        min-width: 40px;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+        box-shadow: 0 0 0 4px $color-white, 0 3px 10px rgba($color-accent, 0.4);
+        margin-right: 15px; // Space between node and text
+        margin-bottom: 0; // Remove bottom margin since layout is row
+        position: absolute;
+        left: -30px; // Pull left to sit on the vertical line
+        top: 30px; // Align vertically with card padding
+    }
+
+    .card:hover & {
+        transform: scale(1.1);
+    }
+}
+
+.cardContent {
+    @include mobile {
+        margin-left: 25px; // Push text content right to make room for absolute absolute positioned node
+    }
 }
 
 .cardTitle {
@@ -98,9 +180,9 @@
     margin-bottom: 20px;
 
     @include mobile {
-        font-size: 16px;
+        font-size: 18px;
         line-height: 26px;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
     }
 }
 

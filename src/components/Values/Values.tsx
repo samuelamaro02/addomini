@@ -38,8 +38,10 @@ export default function Values() {
                     {values.map((value, index) => (
                         <div key={index} className={styles.card}>
                             <span className={styles.number}>{value.number}</span>
-                            <h3 className={styles.cardTitle}>{value.title}</h3>
-                            <p className={styles.cardDescription}>{value.description}</p>
+                            <div className={styles.cardContent}>
+                                <h3 className={styles.cardTitle}>{value.title}</h3>
+                                <p className={styles.cardDescription}>{value.description}</p>
+                            </div>
                         </div>
                     ))}
                 </div>
