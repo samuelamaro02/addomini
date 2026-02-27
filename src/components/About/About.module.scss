@@ -94,6 +94,31 @@
     flex-direction: column;
     justify-content: center;
     transition: transform 0.3s ease;
+    border-radius: 0; // standard zero radius by default
+
+    @include mobile {
+        position: sticky;
+        border-radius: 16px; // add rounding specifically for the modern stack effect
+        margin-bottom: 20px; // space between cards before they stick
+        box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.1); // shadow for depth when stacking
+
+        // Cascading sticky top offsets to show the stacking effect clearly
+        &:nth-child(1) {
+            top: 80px;
+        }
+
+        &:nth-child(2) {
+            top: 100px;
+        }
+
+        &:nth-child(3) {
+            top: 120px;
+        }
+
+        &:nth-child(4) {
+            top: 140px;
+        }
+    }
 
     &:hover {
         transform: scale(1.02);
